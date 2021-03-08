@@ -1,3 +1,5 @@
 rootProject.name = 'authorizationserver-samples'
 
-include 'spring-oidc-client'
+include 'spring-oidc-jwt-client'
+include 'spring-oidc-opaque-client'
+include 'spring-oidc-jwt-resourceserver'

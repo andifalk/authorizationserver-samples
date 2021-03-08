@@ -1,0 +1,17 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9090/auth/jwks
+
+server:
+  servlet:
+    context-path: /resource
+  port: 8085
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace

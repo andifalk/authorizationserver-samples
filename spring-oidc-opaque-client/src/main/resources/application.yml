@@ -1,0 +1,20 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          demo:
+            client-id: public-opaque
+            client-secret: demo
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            client-authentication-method: 'none'
+            scope: openid, profile
+        provider:
+          demo:
+            issuer-uri: http://localhost:9090/auth
+            user-name-attribute: sub
+
+server:
+  servlet:
+    context-path: /demo-client
+  port: 8080
