@@ -1,2 +1,3 @@
-# authorizationserver-samples
-Sample projects using spring boot authorizationserver
+# Authorizationserver Samples
+
+Sample projects using the [authorizationserver](https://github.com/andifalk/authorizationserver).
