@@ -1,0 +1,19 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        opaque-token:
+          introspection-uri: http://localhost:9090/auth/introspect
+          client-id: client
+          client-secret: secret
+
+server:
+  servlet:
+    context-path: /resource/opaque
+  port: 8085
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace

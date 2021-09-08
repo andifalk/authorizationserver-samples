@@ -1,4 +1,4 @@
-package com.example.springoidcjwtresourceserver;
+package com.example.springoidcopaqueresourceserver;
 
 import com.nimbusds.jose.JOSEObjectType;
 import com.nimbusds.jose.proc.DefaultJOSEObjectTypeVerifier;
@@ -25,21 +25,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(sm -> sm.sessionCreationPolicy(STATELESS))
-        .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+        .oauth2ResourceServer(OAuth2ResourceServerConfigurer::opaqueToken)
         .authorizeRequests(ar -> ar.anyRequest().fullyAuthenticated());
-  }
-
-  @Bean
-  JwtDecoder jwtDecoder(OAuth2ResourceServerProperties oAuth2ResourceServerProperties) {
-    DefaultJOSEObjectTypeVerifier<SecurityContext> verifier =
-            new DefaultJOSEObjectTypeVerifier<>(new JOSEObjectType("at+jwt"));
-    NimbusJwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(oAuth2ResourceServerProperties.getJwt().getJwkSetUri())
-            .jwtProcessorCustomizer((processor) -> processor.setJWSTypeVerifier(verifier))
-            .build();
-    OAuth2TokenValidator<Jwt> withClockSkew = new DelegatingOAuth2TokenValidator<>(
-            new JwtTimestampValidator(Duration.ofSeconds(60)),
-            new JwtIssuerValidator(oAuth2ResourceServerProperties.getJwt().getIssuerUri()));
-    decoder.setJwtValidator(withClockSkew);
-    return decoder;
   }
 }

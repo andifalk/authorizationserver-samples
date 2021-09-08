@@ -4,10 +4,11 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:9090/auth/jwks
+          issuer-uri: http://localhost:9090/auth
 
 server:
   servlet:
-    context-path: /resource
+    context-path: /resource/jwt
   port: 8085
 
 logging:
